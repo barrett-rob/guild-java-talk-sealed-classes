@@ -6,14 +6,28 @@ val objectMapper = jacksonObjectMapper().findAndRegisterModules()
 
 fun main() {
 
+
     val creation = objectMapper.readValue(CREATION, jacksonTypeRef<Reservation>())
-    println(creation)
-
     val modification = objectMapper.readValue(MODIFICATION, jacksonTypeRef<Reservation>())
-    println(modification)
-
     val cancellation = objectMapper.readValue(CANCELLATION, jacksonTypeRef<Reservation>())
-    println(cancellation)
+
+    println("creation     ==> $creation")
+    println("modification ==> $modification")
+    println("cancellation ==> $cancellation")
+
+    val reservations = listOf(creation, modification, cancellation)
+
+    reservations.forEach {
+        val handled = when (it.type) {
+            "CREATE" -> {handleCreate(it)}
+            "MODIFY" -> handleModify(it)
+            "CANCEL" -> handleCancel(it)
+            else -> {
+                throw IllegalStateException("type not handled ${it.type}")
+            }
+        }
+    }
+
 
 }
 
@@ -34,3 +48,9 @@ data class Reservation(
     }
 }
 
+fun handleCreate(it: Reservation?) {
+}
+fun handleModify(it: Reservation?) {
+}
+fun handleCancel(it: Reservation?) {
+}
