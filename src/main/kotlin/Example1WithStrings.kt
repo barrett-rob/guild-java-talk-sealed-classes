@@ -16,22 +16,19 @@ fun main() {
     val cancellation = objectMapper.readValue(RES_CANCEL, jacksonTypeRef<ReservationWithStrings>())
 
     val reservations = listOf(creation, modification, cancellation)
+
+    // assign types
     reservations.forEach {
         it.type = it.createdAt?.let { "CREATE" }
             ?: it.modifiedAt?.let { "MODIFY" }
             ?: it.cancelledAt?.let { "CANCEL" }
     }
 
-    println("creation     ==> $creation")
-    println("modification ==> $modification")
-    println("cancellation ==> $cancellation")
-
     reservations.forEach {
-        val handled = when (it.type) {
-            "CREATE" -> doSomething(it)
-            "MODIFY" -> doSomething(it)
-            "CANCEL" -> doSomething(it)
-            null -> throw IllegalStateException()
+        val handled = when (it.type!!) {
+            "CREATE" -> println("creation     ==> $it")
+            "MODIFY" -> println("modification ==> $it")
+            "CANCEL" -> println("cancellation ==> $it")
             else -> throw IllegalStateException()
         }
     }

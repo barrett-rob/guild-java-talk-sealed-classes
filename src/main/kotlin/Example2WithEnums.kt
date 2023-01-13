@@ -27,16 +27,11 @@ fun main() {
                 ?: null
     }
 
-    println("creation     ==> $creation")
-    println("modification ==> $modification")
-    println("cancellation ==> $cancellation")
-
     reservations.forEach {
-        val handled = when (it.type) {
-            ReservationWithEnums.Type.CREATE -> doSomething(it)
-            ReservationWithEnums.Type.MODIFY -> doSomething(it)
-            ReservationWithEnums.Type.CANCEL -> doSomething(it)
-            null -> throw IllegalStateException("type not handled")
+        val handled = when (it.type!!) {
+            ReservationWithEnums.Type.CREATE -> println("creation     ==> $it")
+            ReservationWithEnums.Type.MODIFY -> println("modification ==> $it")
+            ReservationWithEnums.Type.CANCEL -> println("cancellation ==> $it")
         }
     }
 }
