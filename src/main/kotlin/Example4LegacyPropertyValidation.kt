@@ -105,7 +105,7 @@ fun main() {
         validateMax(it.value, it.propertyDefinition)
 
         // how easy is it to prove that all type/min/max combinations are validated?
-        // what if you add another 11 datatypes?
+        // what if you add another 11 dataTypes?
     }
 
 }

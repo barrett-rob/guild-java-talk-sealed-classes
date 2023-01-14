@@ -117,7 +117,7 @@ fun main() {
         validateMinEnum(it.value, it.propertyDefinition)
         validateMaxEnum(it.value, it.propertyDefinition)
 
-        // the compiler will tell us if all the property datatypes are handled
+        // the compiler will tell us if all the dataTypes are handled
     }
 
 }
